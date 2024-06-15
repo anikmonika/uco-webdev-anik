@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\Routing\Annotation\Route as AnnotationRoute;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route as AnnotationRoute;
 */
 
 Route::controller(CatalogController::class)->group(function() {
-
-    route::match(['get', 'post'], '/','list')->name('catalog');
-    route::get('/detail/{id}','detail')->name('catalog-detail');
+    Route::match(['get', 'post'], '/', 'list')->name('catalog');
+    Route::get('/detail/{id}', 'detail')->name('catalog-detail');
 });
+
