@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +20,3 @@ Route::controller(CatalogController::class)->group(function() {
     Route::match(['get', 'post'], '/', 'list')->name('catalog');
     Route::get('/detail/{id}', 'detail')->name('catalog-detail');
 });
-

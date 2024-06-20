@@ -37,4 +37,5 @@
         </div>
         @endforeach
     </div>
+</div>
 </x-template>

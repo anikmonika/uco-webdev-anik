@@ -16,17 +16,17 @@
             <a class="navbar-brand" href="{{ route('catalog') }}">INMAX</a>
             <div class="flex-grow-1 px-5 d-none d-lg-block">
                 <form class="input-group" role="search" action="{{ route('catalog') }}">
-                    <input class="form-control bg-light" type="search" placeholder="Type to search..." aria-label="Search" name="search">
+                    <input class="form-control bg-light" type="search" placeholder="Type to search..." aria-label="fa-fa Search" name="search">
                     <button class="btn btn-light border" type="submit">
-                        <i class="search"></i>
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
             </div>
             <div class="d-flex">
-                <a href="#" class="btn"><i class="cart"></i></a>
+                <a href="#" class="btn"><i class="fa-solid fa-basket-shopping"></i></a>
                 <div class="dropdown">
                     <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="user"></i>
+                        <i class="fa-fa user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Log out</a></li>
