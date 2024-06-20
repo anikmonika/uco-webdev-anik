@@ -18,15 +18,15 @@
                 <form class="input-group" role="search" action="{{ route('catalog') }}">
                     <input class="form-control bg-light" type="search" placeholder="Type to search..." aria-label="Search" name="search">
                     <button class="btn btn-light border" type="submit">
-                        <i class="fa fa-search"></i>
+                        <i class="search"></i>
                     </button>
                 </form>
             </div>
             <div class="d-flex">
-                <a href="#" class="btn"><i class="fa fa-shopping-cart"></i></a>
+                <a href="#" class="btn"><i class="cart"></i></a>
                 <div class="dropdown">
                     <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i>
+                        <i class="user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Log out</a></li>
@@ -38,7 +38,7 @@
             <form class="input-group" role="search" action="{{ route('catalog') }}">
                 <input class="form-control bg-light" type="search" placeholder="Type to search..." aria-label="Search" name="search">
                 <button class="btn btn-light border" type="submit">
-                    <i class="fa fa-search"></i>
+                    <i class="search"></i>
                 </button>
             </form>
         </div>

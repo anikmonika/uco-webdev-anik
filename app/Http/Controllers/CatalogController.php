@@ -29,14 +29,18 @@ class CatalogController extends Controller
             $products->orderBy('name', 'desc');
         }
 
-        $data['products'] = $products->get();
-
-        return view('home', $data);
     }
-
-    function detail(string $id, Request $request)
-    {
-        $data['product'] = Product::where('id', $id)->first();
-        return view('detail', $data);
-    }
-}
+        function home()
+        {
+            $products = Product::get();
+            $data['products'] = $products;
+            return view('home', $data);
+        }
+    
+        function detail(string $id, Request $request)
+        {
+            $product = Product::where('id', $id)->first();
+            $data['product'] = $product;
+            return view('detail', $data);
+        }
+};

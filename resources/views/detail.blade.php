@@ -12,7 +12,7 @@
              <div class="mt-3">
                  <section>
                      <h3>{{ $product->name }}</h3>
-                     <h1 class="fw-bold text-danger">Rp {{ number_format($product->price, 0, ',', '.') }}</h1>
+                     <h1 class="fw-bold text-danger">Rp {{ number_format($product->price, 0, ',','.') }}</h1>
                  </section>
                  <form class="my-4" method="post">
                      @csrf
