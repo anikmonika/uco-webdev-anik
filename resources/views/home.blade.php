@@ -27,7 +27,7 @@
         <div class="col-md-6 col-lg-3">
             <div class="card mb-3">
                 <a href="{{ route('catalog-detail', ['id' => $product->id]) }}" class="btn btn-light p-0 border-0 text-start">
-                    <img src="https://i.etsystatic.com/30157886/r/il/b90110/3176435397/il_570xN.3176435397_8eel.jpg" class="card-img-top" alt="...">
+                    <img src="https://i.pinimg.com/736x/a3/d4/6a/a3d46abacd288542901c4d7cffa089a9.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div class="card-title">{{ $product->name }}</div>
                         <div class="text-danger fw-bold">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
@@ -37,5 +37,12 @@
         </div>
         @endforeach
     </div>
-</div>
+
+    <div class="position-fixed end-0 bottom-0 pe-3 pb-3">
+        <a href="{{ route('product-create') }}" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Add product
+        </a>
+    </div>
+    <div></div>
 </x-template>

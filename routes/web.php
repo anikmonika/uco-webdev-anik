@@ -19,4 +19,18 @@ use Illuminate\Support\Facades\Route;
 Route::controller(CatalogController::class)->group(function() {
     Route::match(['get', 'post'], '/', 'list')->name('catalog');
     Route::get('/detail/{id}', 'detail')->name('catalog-detail');
+    Route::get('/catalog', 'ProductController')->name('catalog');
+});
+
+Route::controller(UserController::class)->group(function() {
+    Route::match(['get', 'post'], '/signup', 'signup')->name('signup');
+    Route::match(['get', 'post'], '/login', 'login')->name('login');
+    Route::post('/logout', 'logout')->name('logout');
+});
+
+Route::controller(ProductController::class)->group(function() {
+    Route::middleware('auth')->group(function() {
+        Route::match(['get', 'post'], '/product/create', 'create')->name('product-create');
+        Route::match(['get', 'post'], '/product/{id}/edit', 'edit')->name('product-edit');
+    });
 });

@@ -29,7 +29,7 @@
                         <i class="fa-fa user"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Log out</a></li>
+                        <li><a class="dropdown-item" href="#">Log out</a><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
                     </ul>
                 </div>
             </div>

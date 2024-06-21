@@ -32,6 +32,7 @@ class CatalogController extends Controller
         $data['products'] = $products->get();
 
         return view('home', $data);
+    
     }
 
     function detail(string $id, Request $request)
@@ -39,4 +40,5 @@ class CatalogController extends Controller
         $data['product'] = Product::where('id', $id)->first();
         return view('detail', $data);
     }
+
 }
