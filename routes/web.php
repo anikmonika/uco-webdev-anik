@@ -21,6 +21,7 @@ Route::controller(CatalogController::class)->group(function() {
     Route::match(['get', 'post'], '/', 'list')->name('catalog');
     Route::get('/detail/{id}', 'detail')->name('catalog-detail');
     Route::get('/catalog', 'ProductController')->name('catalog');
+    Route::get('/catalog', 'CatalogController')->name('home');
 });
 
 Route::controller(UserController::class)->group(function() {
