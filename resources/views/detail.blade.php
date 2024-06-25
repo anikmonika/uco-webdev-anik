@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-5">
             <section>
-                <img src="https://i.pinimg.com/736x/a3/d4/6a/a3d46abacd288542901c4d7cffa089a9.jpg" class="w-100 rounded-3" alt="Product Image">
+                <img src="https://i.pinimg.com/736x/a3/d4/6a/a3d46abacd288542901c4d7cffa089a9.jpg" class="w-100 rounded-3" alt="...">
             </section>
         </div>
         <div class="col-lg-7">
@@ -27,12 +27,4 @@
             </div>
         </div>
     </div>
-
-    <div class="position-fixed end-0 bottom-0 pe-3 pb-3">
-        <a href="{{ route('product-edit', ['id' => $product->id]) }}" class="btn btn-success">
-            <i class="fa fa-edit"></i>
-            Edit product
-        </a>
-    </div>
-
 </x-template>

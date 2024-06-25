@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -32,5 +33,15 @@ Route::controller(ProductController::class)->group(function() {
     Route::middleware('auth')->group(function() {
         Route::match(['get', 'post'], '/product/create', 'create')->name('product-create');
         Route::match(['get', 'post'], '/product/{id}/edit', 'edit')->name('product-edit');
+    });
+});
+
+Route::controller(CartController::class)->group(function() {
+    Route::middleware('auth')->group(function() {
+        Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+        Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+        Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+        Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+        Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
     });
 });

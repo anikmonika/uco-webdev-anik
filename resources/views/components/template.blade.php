@@ -16,29 +16,38 @@
             <a class="navbar-brand" href="{{ route('catalog') }}">INMAX</a>
             <div class="flex-grow-1 px-5 d-none d-lg-block">
                 <form class="input-group" role="search" action="{{ route('catalog') }}">
-                    <input class="form-control bg-light" type="search" placeholder="Type to search..." aria-label="fa-fa Search" name="search">
+                    <input class="form-control bg-light" type="search" placeholder="Type to search..." aria-label="Search" name="search">
                     <button class="btn btn-light border" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa fa-search"></i>
                     </button>
                 </form>
             </div>
             <div class="d-flex">
-                <a href="#" class="btn"><i class="fa-solid fa-basket-shopping"></i></a>
-                <div class="dropdown">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-fa user"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Log out</a><i class="fa-solid fa-arrow-right-from-bracket"></i></li>
-                    </ul>
-                </div>
+                @auth
+                    <a href="#" class="btn"><i class="fa fa-shopping-cart"></i></a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Sign out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
+                @endauth
             </div>
         </div>
         <div class="container-fluid py-2 d-block d-lg-none">
             <form class="input-group" role="search" action="{{ route('catalog') }}">
                 <input class="form-control bg-light" type="search" placeholder="Type to search..." aria-label="Search" name="search">
                 <button class="btn btn-light border" type="submit">
-                    <i class="search"></i>
+                    <i class="fa fa-search"></i>
                 </button>
             </form>
         </div>
@@ -47,5 +56,6 @@
     <div class="container py-3">
         {{ $slot }}
     </div>
+</div>
 </body>
 </html>
