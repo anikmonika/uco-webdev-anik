@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ProductMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +23,6 @@ use Illuminate\Support\Facades\Route;
 Route::controller(CatalogController::class)->group(function() {
     Route::match(['get', 'post'], '/', 'list')->name('catalog');
     Route::get('/detail/{id}', 'detail')->name('catalog-detail');
-    Route::get('/catalog', 'ProductController')->name('catalog');
-    Route::get('/catalog', 'CatalogController')->name('home');
 });
 
 Route::controller(UserController::class)->group(function() {
@@ -31,18 +32,27 @@ Route::controller(UserController::class)->group(function() {
 });
 
 Route::controller(ProductController::class)->group(function() {
-    Route::middleware('auth')->group(function() {
-        Route::match(['get', 'post'], '/product/create', 'create')->name('product-create');
+    Route::middleware(['auth', App\Http\Middleware\ProductMiddleware::class])->group(function() {
+        Route::match(['get', 'post'], '/product/create', 'create')->can('create_product', App\Models\Product::class)->name('product-create');
         Route::match(['get', 'post'], '/product/{id}/edit', 'edit')->name('product-edit');
     });
 });
 
-Route::controller(CartController::class)->group(function() {
-    Route::middleware('auth')->group(function() {
-        Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
-        Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-        Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
-        Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-        Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
-    });
+
+Route::controller(ShoppingCartController::class)->middleware('auth')->group(function() {
+    Route::get('/cart', 'list')->name('cart.list');
+    Route::post('/cart/add/{product_id}', 'add')->name('cart.add');
+    Route::post('/cart/edit/{cart_id}', 'edit')->name('cart.edit');
+    Route::post('/cart/delete/{cart_id}', 'delete')->name('cart.delete');
+});
+
+Route::controller(InvoiceController::class)->middleware('auth')->group(function() {
+    Route::get('/invoice', 'list')->name('invoice.list');
+    Route::get('/invoice/{id}', 'view')->name('invoice.view');
+    Route::post('/invoice/create', 'create')->name('invoice.create');
+});
+
+Route::controller(NotificationController::class)->middleware('auth')->group(function() {
+    Route::get('/notification', 'list')->name('notification.list');
+    Route::get('/notification/{notification_id}', 'read')->name('notification.read');
 });

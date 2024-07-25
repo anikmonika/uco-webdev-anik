@@ -29,10 +29,9 @@ class CatalogController extends Controller
             $products->orderBy('name', 'desc');
         }
 
-        $data['products'] = $products->get();
+        $data['products'] = $products->paginate();
 
         return view('home', $data);
-    
     }
 
     function detail(string $id, Request $request)
@@ -40,5 +39,4 @@ class CatalogController extends Controller
         $data['product'] = Product::where('id', $id)->first();
         return view('detail', $data);
     }
-
 }
