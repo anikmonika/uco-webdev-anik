@@ -43,7 +43,7 @@
     {{ $products->links() }}
 
     @can('create_product', \App\Models\Product::class)
-    <div class="position-fixed end-0 bottom-0 pe-3 pb-3">
+    <div class="position-fixed end-0 bottom-0 pe-0 pb-0">
         <a href="{{ route('product-create') }}" class="btn btn-success">
             <i class="fa fa-plus"></i>
             Add product
