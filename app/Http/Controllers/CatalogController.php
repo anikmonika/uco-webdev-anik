@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class CatalogController extends Controller
 {
@@ -29,9 +30,8 @@ class CatalogController extends Controller
             $products->orderBy('name', 'desc');
         }
 
-        $data['products'] = $products->paginate();
-
-        return view('home', $data);
+        $data['products'] = $products;
+        return View::make('home', $data);
     }
 
     function detail(string $id, Request $request)

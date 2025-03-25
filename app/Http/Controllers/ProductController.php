@@ -7,6 +7,8 @@ use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Http;
 
 class ProductController extends Controller
 {
@@ -18,7 +20,9 @@ class ProductController extends Controller
                 'description' => [],
                 'price' => ['required', 'numeric', 'min:0'],
                 'images' => ['required', 'array'],
-                'images.*' => [File::image()->max(5 * 1024)]
+                'images.*' => ['required_without:images_urls.*', File::image()->max(5 * 1024)],
+                'images_urls' => ['array'],
+                'images_urls.*' => ['required_without:images.*', 'url']
             ]);
 
             $product = Product::create($data);
@@ -29,6 +33,21 @@ class ProductController extends Controller
                         $filename = uniqid().'.'.$extension;
 
                         $file->move('storage/product', $filename);
+
+                        ProductImage::create([
+                            'product_id' => $product->id,
+                            'name' => $filename
+                        ]);
+                    }
+                }
+
+                if ($request->has('images_urls')) {
+                    foreach ($request->input('images_urls') as $url) {
+                        $contents = file_get_contents($url);
+                        $extension = pathinfo($url, PATHINFO_EXTENSION);
+                        $filename = uniqid().'.'.$extension;
+
+                        file_put_contents('storage/product/'.$filename, $contents);
 
                         ProductImage::create([
                             'product_id' => $product->id,
@@ -48,7 +67,6 @@ class ProductController extends Controller
 
     function edit(string $id, Request $request)
     {
-
         $product = Product::where('id', $id)->first();
 
         Gate::authorize('edit_product', $product);
@@ -58,6 +76,10 @@ class ProductController extends Controller
                 'name' => ['required'],
                 'description' => [],
                 'price' => ['required', 'numeric', 'min:0'],
+                'images' => ['array'],
+                'images.*' => ['required_without:images_urls.*', File::image()->max(5 * 1024)],
+                'images_urls' => ['array'],
+                'images_urls.*' => ['required_without:images.*', 'url']
             ]);
 
             if ($product->update($data)) {
@@ -67,6 +89,21 @@ class ProductController extends Controller
                         $filename = uniqid().'.'.$extension;
 
                         $file->move('storage/product', $filename);
+
+                        ProductImage::create([
+                            'product_id' => $product->id,
+                            'name' => $filename
+                        ]);
+                    }
+                }
+
+                if ($request->has('images_urls')) {
+                    foreach ($request->input('images_urls') as $url) {
+                        $contents = file_get_contents($url);
+                        $extension = pathinfo($url, PATHINFO_EXTENSION);
+                        $filename = uniqid().'.'.$extension;
+
+                        file_put_contents('storage/product/'.$filename, $contents);
 
                         ProductImage::create([
                             'product_id' => $product->id,
