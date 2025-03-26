@@ -1,12 +1,17 @@
 {
     "private": true,
+    "name": "my-package",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "babel src -d lib",
+        "test": "jest"
     },
     "devDependencies": {
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.2",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "my-package": "file:"
     }
 }
